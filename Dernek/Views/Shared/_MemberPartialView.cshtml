@@ -1,0 +1,11 @@
+﻿ 
+<ul class="nav navbar-nav">
+    @*<li>@Html.ActionLink("Index", "Index", "Home")</li>*@
+    @*<li>@Html.ActionLink("Manage", "Index", "Manage")</li>*@
+    @*Users page will be limited appearance*@
+    <li>@Html.ActionLink("Kişisel Bilgiler", "Index", "userDetails")</li>
+    <li>@Html.ActionLink("Üyeler", "Index", "Users")</li>
+    @*Payments page will be only user payments*@
+    <li>@Html.ActionLink("Ödemeler", "GetPaymentsByUserId", "payments")</li>
+    <li>@Html.ActionLink("Aktiviteler", "Index", "activities")</li>
+</ul>
