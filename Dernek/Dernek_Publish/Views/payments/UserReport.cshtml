@@ -1,0 +1,158 @@
+﻿@model IEnumerable<Dernek.Models.payment>
+
+
+@section ViewCss{
+    <link href="~/Content/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/_all-skins.min.css" rel="stylesheet" />
+}
+
+
+
+<br />
+<div class="container">
+    <div class="row">
+        <div class="com-md-2 text-left"><h5>Yaptığınız Ödemeleriniz Görüntülenmektedir.</h5></div>
+        <div class="com-md-2 text-right">
+            <h4>
+                <div style="margin-right:15px;">
+                @if (User.IsInRole("Manager"))
+                {
+                    @Html.Label(string.Format("{0} : {1}{2}", "Toplam Kasa Bakiyesi", Convert.ToDecimal(ViewData["TotalBalance"]), "₺"))
+                }
+                else
+                {
+                    @Html.Label(string.Format("{0} : {1}{2}", "Toplam Bakiye", Convert.ToDecimal(ViewData["TotalBalance"]), "₺"))
+                }
+            </div>
+            </h4>
+        </div>
+    </div>
+</div>
+<br />
+@if (User.IsInRole("Manager"))
+{
+    using (Html.BeginForm("GetPaymentsByUserId", "payments"))
+    {
+        <div class="row">
+            <div class="col-md-2">
+                @Html.DropDownList("userId", (MultiSelectList)ViewData["users"], new { id = "multipledropdownlist_users" })
+            </div>
+            <div class="col-md-10">
+                @*@Html.ActionLink("Sorgula", "GetPaymentsByUserId", "payments", new { @class = "btn btn-primary" })*@
+                <input type="submit" value="Sorgula" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+}
+
+<div>
+    @*<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Activity.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.payTotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.paymentDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.createrUserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.mounth)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Activity.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.payTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.paymentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.createrUserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mounth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.id })
+                </td>
+            </tr>
+        }
+
+        </table>*@
+</div>
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Ödeme Listesi</h3>
+        <div class="box-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control pull-right" placeholder="Üye Adı">
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover table-striped">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Activity.name)</th>
+                <th>@Html.DisplayNameFor(model => model.payTotal)</th>
+                <th>@Html.DisplayNameFor(model => model.paymentDate)</th>
+                <th>@Html.DisplayNameFor(model => model.mounth)</th>
+                <th>@Html.DisplayNameFor(model => model.description)</th>
+                @if (User.IsInRole("Manager"))
+                {
+                    <th>@Html.DisplayNameFor(model => model.ApplicationUser.UserName)</th>
+                }
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Activity.name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.payTotal)</td>
+                    <td>@Html.DisplayFor(modelItem => item.paymentDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.mounth)</td>
+                    <td>@Html.DisplayFor(modelItem => item.description)</td>
+                    @if (User.IsInRole("Manager"))
+                    {
+                        <td>@Html.DisplayFor(modelItem => item.ApplicationUser.UserName)</td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#multipledropdownlist_users').multiselect({
+            enableFiltering: true,
+            filterPlaceholder: 'Ara...',
+            nonSelectedText: 'Üye Seçiniz'
+        });
+    });
+</script>
+

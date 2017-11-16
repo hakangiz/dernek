@@ -1,0 +1,58 @@
+﻿@model Dernek.Models.monthlyUserFollowUp
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>monthlyUserFollowUp</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.month)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.month)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.followStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.followStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.followDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.followDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.actionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.actionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createrUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createrUserId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

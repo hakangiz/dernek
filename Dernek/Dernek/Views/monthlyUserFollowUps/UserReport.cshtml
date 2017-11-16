@@ -1,0 +1,162 @@
+﻿@model IEnumerable<Dernek.Models.monthlyUserFollowUp>
+
+@section ViewCss{
+    <link href="~/Content/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/_all-skins.min.css" rel="stylesheet" />
+}
+<div class="row">
+    <br />
+    <br />
+</div>
+
+@if (User.IsInRole("Manager"))
+{
+    using (Html.BeginForm("GetMonthlyFollowByUserId", "monthlyUserFollowUps"))
+    {
+        <div class="row">
+            <div class="col-md-2">
+                @Html.DropDownList("userId", (MultiSelectList)ViewData["users"], new { id = "multipledropdownlist_users" })
+            </div>
+            <div class="col-md-10">
+                @*@Html.ActionLink("Sorgula", "GetPaymentsByUserId", "payments", new { @class = "btn btn-primary" })*@
+                <input type="submit" value="Sorgula" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+}
+
+        @*<p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.month)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.followStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.followDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.actionDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.createrUserId)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.month)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.followStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.followDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.actionDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.createrUserId)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        </td>
+                    </tr>
+                }
+
+            </table>*@
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Çalışmalara Katılım Listesi</h3>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Üye Adı">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.month)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.followStatus)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.followDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.actionDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.createrUserId)
+                        </th>
+                        @if (User.IsInRole("Manager"))
+                        {
+                            <th>@Html.DisplayNameFor(model => model.ApplicationUser.UserName)</th>
+                        }
+                        @if (User.IsInRole("Manager"))
+                        {
+                            <th>@Html.DisplayNameFor(model => model.ApplicationUser.UName)</th>
+                        }
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.month)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.followStatus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.followDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.actionDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.createrUserId)
+                            </td>
+                            @if (User.IsInRole("Manager"))
+                            {
+                                <td>@Html.DisplayFor(modelItem => item.ApplicationUser.UserName)</td>
+                            }
+                            @if (User.IsInRole("Manager"))
+                            {
+                                <td>@Html.DisplayFor(modelItem => item.ApplicationUser.UName)</td>
+                            }
+                        </tr>
+                    }
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('#multipledropdownlist_users').multiselect({
+                    enableFiltering: true,
+                    filterPlaceholder: 'Ara...',
+                    nonSelectedText: 'Üye Seçiniz'
+                });
+            });
+        </script>

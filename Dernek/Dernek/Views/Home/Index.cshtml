@@ -1,0 +1,334 @@
+﻿@{
+    ViewBag.Title = "Duyurular";
+}
+<link href="~/Content/custom.min.css" rel="stylesheet" />
+@*<script>
+        //$.ajax({
+        //    url: "http://localhost:54567/api/values", success: function (result) {
+        //        console.log(result);
+        //    }
+        //});
+        $.ajax({
+            type: "post",
+            url: '@Url.Action("Deneme", "Home")',
+            data: "{}",
+        dataType: "json",
+        success: function(msg) {
+            console.log(msg);
+        },
+        error: function(msg) {
+            console.log(msg);
+        }
+        });
+     
+    </script>*@
+<div class="jumbotron">
+    @*<h1>Han Zeybekleri</h1>*@
+    
+    @*Header kısmı*@
+    <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+        <!-- Overlay -->
+        @*<sdiv class="overlay"></div>*@
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#bs-carousel" data-slide-to="1"></li>
+            <li data-target="#bs-carousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item slides active">
+                <div class="slide-1"></div>
+                @*<div class="hero">
+                    <hgroup>
+                        <h1>We are creative</h1>
+                        <h3>Get start your next awesome project</h3>
+                    </hgroup>
+                    <button class="btn btn-hero btn-lg" role="button">See all features</button>
+                </div>*@
+            </div>
+            <div class="item slides">
+                <div class="slide-2"></div>
+                @*<div class="hero">
+                    <hgroup>
+                        <h1>We are smart</h1>
+                        <h3>Get start your next awesome project</h3>
+                    </hgroup>
+                    <button class="btn btn-hero btn-lg" role="button">See all features</button>
+                </div>*@
+            </div>
+            <div class="item slides">
+                <div class="slide-3"></div>
+                @*<div class="hero">
+                    <hgroup>
+                        <h1>We are amazing</h1>
+                        <h3>Get start your next awesome project</h3>
+                    </hgroup>
+                    <button class="btn btn-hero btn-lg" role="button">See all features</button>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    @*Header kısmı*@
+
+    @*<p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Duyurular <small>Açıklama</small></h2>
+                @*<ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>*@
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">Ekim</p>
+                        <p class="day">3</p>
+                    </a>
+                    <div class="media-body">
+                        <a class="title" href="#">Sezon Başlangıcı</a>
+                        <p>2017-2018 sezonu açılışı 3 Ekimde başlayacaktır. Üye aidatı 40 TL olup her ayın 1'i ile 5'i arasında Hakan Cengiz'e verilecektir. </p>
+                        <p>Planlanan etkinlikler 03.10.2017 tarihinde başlayıp Mayıs ayının sonunda bitecektir. Toplamda 8 ay çalışmalarımız devam edecektir.</p>
+                    </div>
+                </article>
+                @*<article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">April</p>
+                        <p class="day">23</p>
+                    </a>
+                    <div class="media-body">
+                        <a class="title" href="#">Item Two Title</a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">April</p>
+                        <p class="day">23</p>
+                    </a>
+                    <div class="media-body">
+                        <a class="title" href="#">Item Two Title</a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">April</p>
+                        <p class="day">23</p>
+                    </a>
+                    <div class="media-body">
+                        <a class="title" href="#">Item Two Title</a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">April</p>
+                        <p class="day">23</p>
+                    </a>
+                    <div class="media-body">
+                        <a class="title" href="#">Item Three Title</a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>*@
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Kurs Planı<small>Açıklama</small></h2>
+                @*<ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>*@
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">1</p>
+                        <p class="day"></p>
+                    </a>
+                    <div class="media-body">
+                        @*<a class="title" href="#">Harmandalı</a>*@
+                        <p>Harmandalı Zeybeği</p>
+                    </div>
+                </article>
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">2</p>
+                        <p class="day"></p>
+                    </a>
+                    <div class="media-body">
+                        @*<a class="title" href="#">Item Two Title</a>*@
+                        <p>Süslü Jandarma Zeybeği</p>
+                    </div>
+                </article>
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">3</p>
+                        <p class="day"></p>
+                    </a>
+                    <div class="media-body">
+                        @*<a class="title" href="#"></a>*@
+                        <p>Dağlı Zeybeği</p>
+                    </div>
+                </article>
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">4</p>
+                        <p class="day"></p>
+                    </a>
+                    <div class="media-body">
+                        @*<a class="title" href="#"></a>*@
+                        <p>Kırmızı Buğday Zeybeği</p>
+                    </div>
+                </article>
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">5</p>
+                        <p class="day"></p>
+                    </a>
+                    <div class="media-body">
+                        @*<a class="title" href="#"></a>*@
+                        <p>Baylan Cemile Zeybeği</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Çalışma Yerimiz <small>Harita</small></h2>
+                @*<ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>*@
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <article class="media event">
+                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpY8csPlSzaENwT1tDw6FLJJmmb_TKs8s&callback=initMap"
+                            type="text/javascript"></script>
+                    <div style='overflow:hidden;height:160px;width:350px;'>
+                        <div id='gmap_canvas' style='height:160px;width:350px;'>
+                        </div>
+                        <style>
+                            #gmap_canvas img {
+                                max-width: none !important;
+                                background: none !important;
+                            }
+                        </style>
+                    </div>
+                    <script type='text/javascript'>function initMap() { var myOptions = { zoom: 200, center: new google.maps.LatLng(38.57899770608982, 27.06815075641406), mapTypeId: google.maps.MapTypeId.HYBRID }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(38.57899770608982, 27.06815075641406) }); infowindow = new google.maps.InfoWindow({ content: '<strong>Koyundere</strong><br><br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', initMap);</script>
+
+
+                    @*<a class="pull-left date">
+                        <p class="month">April</p>
+                        <p class="day">23</p>
+                    </a>
+                    <div class="media-body">
+                        <a class="title" href="#">Item One Title</a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>*@
+                </article>
+                @*<article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">April</p>
+                        <p class="day">23</p>
+                    </a>
+                    <div class="media-body">
+                        <a class="title" href="#">Item Two Title</a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">April</p>
+                        <p class="day">23</p>
+                    </a>
+                    <div class="media-body">
+                        <a class="title" href="#">Item Two Title</a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">April</p>
+                        <p class="day">23</p>
+                    </a>
+                    <div class="media-body">
+                        <a class="title" href="#">Item Two Title</a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>
+                <article class="media event">
+                    <a class="pull-left date">
+                        <p class="month">April</p>
+                        <p class="day">23</p>
+                    </a>
+                    <div class="media-body">
+                        <a class="title" href="#">Item Three Title</a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
