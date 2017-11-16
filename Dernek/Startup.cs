@@ -56,7 +56,7 @@ namespace Dernek
 
                 //user1.userDetail = user1Detail;
 
-                var chkUser = UserManager.Create(user1, "Password1!");
+                var chkUser = UserManager.Create(user1, "123456");
 
                 //Add default User to Role Admin
                 if (chkUser.Succeeded)
@@ -82,7 +82,7 @@ namespace Dernek
 
                 //user2.userDetail = user2Detail;
 
-                var chkUser2 = UserManager.Create(user2, "Password1!");  
+                var chkUser2 = UserManager.Create(user2, "123456");  
 
                 //Add default User to Role Admin
                 if (chkUser2.Succeeded)
@@ -115,7 +115,7 @@ namespace Dernek
 
                 //user.userDetail = userDetail;
 
-                var chkUser = UserManager.Create(user, "Password1!");
+                var chkUser = UserManager.Create(user, "123456");
 
                 
 

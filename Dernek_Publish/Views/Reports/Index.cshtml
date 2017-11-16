@@ -1,0 +1,76 @@
+﻿@section ViewCss{
+    <link href="~/Content/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/_all-skins.min.css" rel="stylesheet" />
+}
+
+<div class="container">
+    <!--  Content Area-->
+    <div class="row">
+        <div class="col-md-5 col-sm-6">
+            <div class="row">
+                <h2 class="">Rapor Listesi</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="row content">
+                        <ul class="list-inline">
+                            <li><h4>@Html.ActionLink("Üye Borç Sorgulama", "GetPaymentsByUserId", "payments")</h4></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="row content">
+                        <ul class="list-inline">
+                            <li><h4>@Html.ActionLink("Üye Devam Listesi", "GetMonthlyFollowByUserId", "monthlyUserFollowUps")</h4></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @*<div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="row content">
+                        <ul class="list-unstyled">
+                            <li>Deneme 3</li>
+                            <li>Deneme 4</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+        @*<div class="col-md-6 col-sm-5">
+            <div class="row">
+                <h2 class="">Job Categories</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="row content">
+                        <ul class="list-unstyled">
+                            <li>,</li>
+                            <li>,</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="row content">
+                            <ul class="list-unstyled">
+                                <li>,</li>
+                                <li>,</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <div class="row content">
+                                <ul class="list-unstyled">
+                                    <li>,</li>
+                                    <li>,</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    </div>
+</div>

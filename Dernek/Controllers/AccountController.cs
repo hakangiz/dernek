@@ -159,7 +159,7 @@ namespace Dernek.Controllers
             if (ModelState.IsValid)
             {
 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email ,UName=model.UName};
 
                 //var userDetail = new userDetail
                 //{

@@ -1,0 +1,72 @@
+﻿@model Dernek.Models.payment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>payment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.activityId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activityId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paymentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paymentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createrUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createrUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mounth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mounth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

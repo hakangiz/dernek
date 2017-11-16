@@ -452,7 +452,9 @@
     <Compile Include="Controllers\activitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\monthlyUserFollowUpsController.cs" />
     <Compile Include="Controllers\paymentsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\userDetailsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -477,9 +479,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Repository\ClassRepository\ActivityRepository.cs" />
+    <Compile Include="Repository\ClassRepository\MonthlyRepository.cs" />
     <Compile Include="Repository\ClassRepository\PaymentRepository.cs" />
     <Compile Include="Repository\ClassRepository\UserDetailRepository.cs" />
     <Compile Include="Repository\IActivityRepository.cs" />
+    <Compile Include="Repository\IMonthlyRepository.cs" />
     <Compile Include="Repository\IPaymentRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IUserDetail.cs" />
@@ -493,6 +497,7 @@
     <Content Include="Content\bootstrap-social.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\kendo\2015.1.318\Black\editor.png" />
@@ -759,9 +764,14 @@
     <None Include="Properties\PublishProfiles\wwroot.pubxml" />
     <None Include="Resources\10672439_812448268789173_197250670625061929_n.jpg" />
     <None Include="Resources\hanImage.png" />
+    <Content Include="Resources\header1.jpg" />
+    <Content Include="Resources\header1_edited.jpg" />
+    <Content Include="Resources\header2.jpg" />
+    <Content Include="Resources\header3.jpg" />
     <Content Include="Scripts\AjaxScripts.js" />
     <Content Include="Scripts\bootstrap-3.3.2.min.css" />
     <Content Include="Scripts\bootstrap-3.3.2.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-multiselect.css" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1442,6 +1452,14 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\userDetails\Index.cshtml" />
     <Content Include="Views\userDetails\Create.cshtml" />
+    <Content Include="Views\payments\UserReport.cshtml" />
+    <Content Include="Views\monthlyUserFollowUps\Create.cshtml" />
+    <Content Include="Views\monthlyUserFollowUps\Delete.cshtml" />
+    <Content Include="Views\monthlyUserFollowUps\Details.cshtml" />
+    <Content Include="Views\monthlyUserFollowUps\Edit.cshtml" />
+    <Content Include="Views\monthlyUserFollowUps\Index.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\monthlyUserFollowUps\UserReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

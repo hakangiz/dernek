@@ -19,12 +19,14 @@ namespace Dernek.Repository
             Users = _context.Users;
             Payment = new PaymentRepository(_context);
             UserDetail = new UserDetailRepository(_context);
+            MonthlyUser = new MonthlyRepository(_context);
         }
         public IActivityRepository Activity { get; private set; }
         public  IDbSet<ApplicationUser> Users { get; set; }
         public IDbSet<IdentityUserRole> Roles { get; set; }
         public IPaymentRepository Payment { get; set; }
         public IUserDetail UserDetail { get; set; }
+        public IMonthlyRepository MonthlyUser { get; set; }
         public int Complete()
         {
             return _context.SaveChanges();

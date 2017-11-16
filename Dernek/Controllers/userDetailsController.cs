@@ -27,7 +27,10 @@ namespace Dernek.Controllers
             var user = workOfTables.Users.Include(m => m.userDetail).Where(x => x.Id == activeUserId).FirstOrDefault();
             if (user.userDetail != null)
             {
-                ViewBag.userImage = String.Format("data:image/{0};base64,{1}",user.userDetail.userImageType, Convert.ToBase64String(user.userDetail.userImage));
+                if (user.userDetail.userImage != null)
+                {
+                    ViewBag.userImage = String.Format("data:image/{0};base64,{1}", user.userDetail.userImageType, Convert.ToBase64String(user.userDetail.userImage));
+                }
             }
              
             return View(user);
@@ -119,10 +122,13 @@ namespace Dernek.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             userDetail userDetail = db.userDetail.Find(id);
-            ViewBag.userImage = String.Format("data:image/{0};base64,{1}",userDetail.userImageType, Convert.ToBase64String(userDetail.userImage));
             if (userDetail == null)
             {
                 return HttpNotFound();
+            }
+            if (userDetail.userImage != null)
+            {
+                ViewBag.userImage = String.Format("data:image/{0};base64,{1}", userDetail.userImageType, Convert.ToBase64String(userDetail.userImage));
             }
             return View(userDetail);
         }

@@ -55,7 +55,7 @@ namespace Dernek.Controllers
         {
             //var appUsers = (from m in workOfTables.Users select m).ToList();
             var appUsers = workOfTables.Users.ToList();
-            ViewBag.users = new MultiSelectList(appUsers, "Id", "UserName");
+            ViewBag.users = new MultiSelectList(appUsers, "Id", "UName");
             return View();
         }
 
@@ -166,7 +166,7 @@ namespace Dernek.Controllers
                     db.payment.Add(societyPayment);
 
                     var activityAndUser = db.activity.Include(x => x.ApplicationUsers).Where(s => s.id == activity.id).First();
-                    double memberPayment = AbstractTools.MemberPayTotalForActivity(activityAndUser);
+                    //double memberPayment = AbstractTools.MemberPayTotalForActivity(activityAndUser);
 
                     foreach (ApplicationUser member in activityAndUser.ApplicationUsers)
                     {
@@ -179,7 +179,7 @@ namespace Dernek.Controllers
                             description = "System - Activity User Payment",
                             mounth = new DateTime(activityAndUser.endDate.Year, 1, 1),
                             paymentDate = DateTime.Now,
-                            payTotal = memberPayment
+                            payTotal = activity.price
                         };
                         db.payment.Add(newMemberPayment);
 
@@ -192,7 +192,7 @@ namespace Dernek.Controllers
                             description = "System - Activity Out Payment",
                             mounth = new DateTime(activity.endDate.Year, 1, 1),
                             paymentDate = DateTime.Now,
-                            payTotal = memberPayment * -1,
+                            payTotal = activity.price * -1,
                             applicationUserId = HanUser.Id
                         };
                         db.payment.Add(societyPaymentOut);

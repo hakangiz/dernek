@@ -65,6 +65,8 @@ namespace Dernek.Models
 
     public class RegisterViewModel
     {
+        [Display(Name = "UName")]
+        public string UName { get; set; }
 
         [Required]
         [EmailAddress]

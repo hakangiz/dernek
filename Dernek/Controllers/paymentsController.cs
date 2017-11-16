@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Dernek.Models;
 using Dernek.Repository;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Dernek.Controllers
 {
@@ -20,7 +22,13 @@ namespace Dernek.Controllers
         // GET: payments
         public ActionResult Index()
         {
-            return View(db.payment.Include(p=>p.Activity).Include(x=>x.ApplicationUser).ToList());
+            if (db.payment.Count() > 0)
+            {
+                ViewData["TotalBalance"] = db.payment.Where(m=>m.ApplicationUser.UserName=="Han").Sum(m => m.payTotal);
+            }
+            else { ViewData["TotalBalance"] = 0.ToString("C0"); }
+            List<payment> paymentList = db.payment.Include(p => p.Activity).Include(x => x.ApplicationUser).OrderByDescending(c => c.id).ToList();
+            return View(paymentList);
         }
 
         // GET: payments/Details/5
@@ -45,9 +53,12 @@ namespace Dernek.Controllers
             var actList = workOfTables.Activity.GetAll();
             ViewBag.activities = new MultiSelectList(actList, "Id", "name");
             var appUsers = workOfTables.Users.ToList();
-            ViewBag.users = new MultiSelectList(appUsers, "Id", "UserName");
+            ViewBag.users = new MultiSelectList(appUsers, "Id", "UName");
 
-            return View();
+            var paymentModel = new payment();
+            paymentModel.createrUserId = User.Identity.GetUserId();
+
+            return View(paymentModel);
         }
 
         // POST: payments/Create
@@ -55,23 +66,43 @@ namespace Dernek.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,payTotal,paymentDate,createrUserId,mounth,description")] payment payment,string UserId,string activity)
+        public ActionResult Create([Bind(Include = "id,payTotal,paymentDate,createrUserId,mounth,description")] payment payment, IList<string> UserId, string activity)
         {
+
             if (ModelState.IsValid)
             {
+                MonthName monthName = (MonthName)payment.mounth.Date.Month;
                 var appU = new ApplicationUser();
-                appU = workOfTables.Users.Where(x=>x.Id==UserId).First();
-                payment.ApplicationUser = appU;
-
-                var act = new activity();
-                act = workOfTables.Activity.Get(Convert.ToInt32(activity));
-                payment.Activity = act;
-
-
-
-                //db.payment.Add(payment);
-                //db.SaveChanges();
-                workOfTables.Payment.Add(payment);
+                foreach (var user in UserId)
+                {
+                    appU = workOfTables.Users.Where(x => x.Id == user).First();
+                    var pay = new payment {
+                        ApplicationUser=appU,
+                        createrUserId= User.Identity.GetUserId(),
+                        Activity= workOfTables.Activity.Get(Convert.ToInt32(activity)),
+                        description=payment.description,
+                        mounth=payment.mounth,
+                        paymentDate=payment.paymentDate,
+                        payTotal=payment.payTotal,
+                };
+                    if (appU.UserName != "Han" && payment.payTotal>0)
+                    {
+                        var UHan = new ApplicationUser();
+                        UHan = workOfTables.Users.Where(x => x.UserName == "Han").First();
+                        var HanPay = new payment
+                        {
+                            ApplicationUser = UHan,
+                            createrUserId = User.Identity.GetUserId(),
+                            Activity = workOfTables.Activity.Get(Convert.ToInt32(activity)),
+                            description = string.Format("{0} kullanıcısının {1} tarihli ödemesidir.",appU.UserName, monthName),
+                            mounth = payment.mounth,
+                            paymentDate = payment.paymentDate,
+                            payTotal = payment.payTotal,
+                        };
+                        workOfTables.Payment.Add(HanPay);
+                    }
+                    workOfTables.Payment.Add(pay);
+                }
                 workOfTables.Complete();
                 return RedirectToAction("Index");
             }
@@ -87,10 +118,13 @@ namespace Dernek.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             payment payment = db.payment.Find(id);
+            payment otherpay=workOfTables.Payment.Get(id);
             if (payment == null)
             {
                 return HttpNotFound();
             }
+            var actList = workOfTables.Activity.GetAll();
+            ViewBag.activities = new MultiSelectList(actList, "Id", "name");
             return View(payment);
         }
 
@@ -99,10 +133,12 @@ namespace Dernek.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,activityId,payTotal,paymentDate,createrUserId,mounth,description")] payment payment)
+        public ActionResult Edit([Bind(Include = "id,activityId,payTotal,paymentDate,createrUserId,mounth,description,applicationUserId,createdUserId")] payment payment,string activity)
         {
             if (ModelState.IsValid)
             {
+                payment.activityId = Convert.ToInt32(activity);
+
                 db.Entry(payment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -139,14 +175,24 @@ namespace Dernek.Controllers
 
         public ActionResult GetPaymentsByUserName(string userName)
         {
-            var payments= workOfTables.Payment.GetUserPaymentsByUserName(userName);
-            return View(payments);
+            var payments = workOfTables.Payment.GetUserPaymentsByUserName(userName);
+            return View("Index", payments);
         }
 
         public ActionResult GetPaymentsByUserId(string userId)
         {
+
+            if (userId == null)
+            {
+                //return View();
+                ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                userId = user.Id;
+            }
             var payments = workOfTables.Payment.GetUserPaymentsByUserId(userId);
-            return View("Index", payments);
+            ViewData["TotalBalance"] = payments.Sum(m => m.payTotal);
+
+            ViewData["users"] = new MultiSelectList(workOfTables.Users, "Id", "UName");
+            return View("UserReport", payments.Reverse());
         }
 
         protected override void Dispose(bool disposing)
@@ -157,5 +203,22 @@ namespace Dernek.Controllers
             }
             base.Dispose(disposing);
         }
+    }
+
+    public enum MonthName
+    {
+        IlkAyBos,
+        Ocak,
+        Şubat,
+        Mart,
+        Nisan,
+        Mayıs,
+        Haziran,
+        Temmuz,
+        Ağustos,
+        Eylül,
+        Ekim,
+        Kasım,
+        Aralık
     }
 }

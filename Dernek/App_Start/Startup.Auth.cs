@@ -33,7 +33,9 @@ namespace Dernek
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
-                }
+                },
+                ExpireTimeSpan = TimeSpan.FromHours(8),
+                SlidingExpiration = true
             });            
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 

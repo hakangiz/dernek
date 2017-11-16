@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -16,12 +17,17 @@ namespace Dernek.Models
         //[ForeignKey("activityId")]
         public virtual activity Activity { get; set; }
         [DisplayName("Toplam Tutar")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public double payTotal { get; set; }
         [DisplayName("Ödeme Tarihi")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime paymentDate { get; set; }
         
         public string createrUserId { get; set; }
         [DisplayName("Ödeme Ayı")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime mounth { get; set; }
         [DisplayName("Açıklama")]
         public string description { get; set; }

@@ -14,6 +14,7 @@ namespace Dernek.Models
     public class ApplicationUser : IdentityUser
     {
         public int userId { get; set; }
+        public string UName { get; set; }
         public bool realMember { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -97,11 +98,13 @@ namespace Dernek.Models
                 .HasForeignKey(m => m.activityId);
 
             modelBuilder.Entity<monthlyUserFollowUp>()
-                .HasOptional(x => x.ApplicationUsers)
+                .HasOptional(x => x.ApplicationUser)
                 .WithMany(t => t.monthlyUserFollowUp)
-                .Map(a =>a.MapKey("userId"));
+                .HasForeignKey(t=>t.applicationUserId);
 
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<Dernek.Models.monthlyUserFollowUp> monthlyUserFollowUps { get; set; }
     }
 }
